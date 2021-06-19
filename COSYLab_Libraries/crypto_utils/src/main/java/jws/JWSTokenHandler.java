@@ -96,6 +96,7 @@ public class JWSTokenHandler {
     public Map<String, Object> getClaimsFromJWS(String jws) {
         return Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(jws).getBody();
     }
+
     public String getClaimFromJWS(String jws, String claimKey) {
         Claims claims = Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(jws).getBody();
         return (String)claims.get(claimKey);

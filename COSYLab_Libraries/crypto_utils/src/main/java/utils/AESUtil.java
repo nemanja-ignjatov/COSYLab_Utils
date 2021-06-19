@@ -16,8 +16,6 @@ import static utils.CryptoConstants.*;
 
 public class AESUtil {
 
-
-
     public static String encryptString(String strToEncrypt, SecretKey secretKey, IvParameterSpec ivSpec) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
 
         Cipher cipher = Cipher.getInstance(AES_ALGORITHM);
@@ -45,4 +43,5 @@ public class AESUtil {
         return new SecretKeySpec(key.getEncoded(), PBKDF2_KEY_ALG);
 
     }
+
 }

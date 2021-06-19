@@ -27,23 +27,6 @@ public class CryptoUtilFunctions {
                 (privKey);
     }
 
-    public static String createSHA256Hash(String input){
-        try {
-            MessageDigest digest = MessageDigest.getInstance("SHA-256");
-            byte[] encodedHash = digest.digest(input.getBytes(StandardCharsets.UTF_8));
-            StringBuffer hexString = new StringBuffer();
-            for (int i = 0; i < encodedHash.length; i++) {
-                String hex = Integer.toHexString(0xff & encodedHash[i]);
-                if(hex.length() == 1) hexString.append('0');
-                hexString.append(hex);
-            }
-            return hexString.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     public static String generateUUID() {
         return UUID.randomUUID().toString();
     }

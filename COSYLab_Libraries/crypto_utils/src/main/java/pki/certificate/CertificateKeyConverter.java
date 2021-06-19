@@ -12,16 +12,16 @@ import org.bouncycastle.util.io.pem.PemReader;
 import utils.CryptoConstants;
 
 import java.io.*;
-import java.security.Key;
 import java.security.KeyPair;
 import java.security.PrivateKey;
-import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 
 public class CertificateKeyConverter {
+
+    private static final String CSR_KEY = "CERTIFICATE REQUEST";
 
     public static X509Certificate convertCertToX509(Certificate cert) throws CertificateException {
         CertificateFactory cf = CertificateFactory.getInstance(CryptoConstants.CERTIFICATE_FACTORY_NAME);
@@ -52,30 +52,6 @@ public class CertificateKeyConverter {
         return new JcaX509CertificateConverter().setProvider(CryptoConstants.PROVIDER_NAME).getCertificate(certificateHolder);
     }
 
-    public static String convertKeyToPEM(Key key) throws IOException {
-        StringWriter keyPEMDataStringWriter = new StringWriter();
-        JcaPEMWriter pemWriter = new JcaPEMWriter(keyPEMDataStringWriter);
-        pemWriter.writeObject(key);
-        pemWriter.close();
-        return keyPEMDataStringWriter.toString();
-    }
-
-    public static PrivateKey convertPEMToPrivateKey(String pemPrivatekey) throws IOException {
-        StringReader reader = new StringReader(pemPrivatekey);
-        PEMParser pemParser = new PEMParser(reader);
-        Object o = pemParser.readObject();
-        KeyPair kp = new JcaPEMKeyConverter().setProvider(CryptoConstants.PROVIDER_NAME).getKeyPair((PEMKeyPair) o);
-        return kp.getPrivate();
-    }
-
-    public static PublicKey convertPEMToPublicKey(String pemPublickey) throws IOException {
-        StringReader reader = new StringReader(pemPublickey);
-        PEMParser pemParser = new PEMParser(reader);
-        Object o = pemParser.readObject();
-        KeyPair kp = new JcaPEMKeyConverter().setProvider(CryptoConstants.PROVIDER_NAME).getKeyPair((PEMKeyPair) o);
-        return kp.getPublic();
-    }
-
     public static PKCS10CertificationRequest convertPemToPKCS10CertificationRequest(String pem) {
         PKCS10CertificationRequest csr = null;
         ByteArrayInputStream pemStream;
@@ -99,12 +75,28 @@ public class CertificateKeyConverter {
     }
 
     public static String convertPKCS10CertificationRequestToPEM(PKCS10CertificationRequest certificationRequest) throws IOException {
-        PemObject pemObject = new PemObject("CERTIFICATE REQUEST", certificationRequest.getEncoded());
+        PemObject pemObject = new PemObject(CSR_KEY, certificationRequest.getEncoded());
         StringWriter str = new StringWriter();
         JcaPEMWriter pemWriter = new JcaPEMWriter(str);
         pemWriter.writeObject(pemObject);
         pemWriter.close();
         str.close();
         return str.toString();
+    }
+
+    public static String convertPrivateKeyToPEM(PrivateKey key) throws IOException {
+        StringWriter keyPEMDataStringWriter = new StringWriter();
+        JcaPEMWriter pemWriter = new JcaPEMWriter(keyPEMDataStringWriter);
+        pemWriter.writeObject(key);
+        pemWriter.close();
+        return keyPEMDataStringWriter.toString();
+    }
+
+    public static PrivateKey convertPEMToPrivateKey(String pemPrivatekey) throws IOException {
+        StringReader reader = new StringReader(pemPrivatekey);
+        PEMParser pemParser = new PEMParser(reader);
+        Object o = pemParser.readObject();
+        KeyPair kp = new JcaPEMKeyConverter().setProvider(CryptoConstants.PROVIDER_NAME).getKeyPair((PEMKeyPair) o);
+        return kp.getPrivate();
     }
 }

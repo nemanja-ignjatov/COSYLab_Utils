@@ -16,9 +16,14 @@ public class IdentityGenerator {
                 CryptoConstants.IDENTITY_SEPARATOR + CryptoUtilFunctions.generateUUID();
     }
 
-    public static String getFTAIdFromFogServiceIdentifies(String identity) {
+    public static String getFTAIdFromFogServiceIdentifier(String identity) {
         String[] parts = identity.split("\\" + CryptoConstants.IDENTITY_SEPARATOR);
         return parts[3];
+    }
+
+    public static String getFCComponentIdFromFogServiceIdentifier(String identity) {
+        String[] parts = identity.split("\\" + CryptoConstants.IDENTITY_SEPARATOR);
+        return parts[4];
     }
 
     public static String generateUserIdentifier(String ftaIdentifier) {
@@ -26,11 +31,16 @@ public class IdentityGenerator {
                 + CryptoConstants.IDENTITY_SEPARATOR + ftaIdentifier + CryptoConstants.IDENTITY_SEPARATOR + CryptoUtilFunctions.generateUUID();
     }
 
-    public static String generateThingIdentifier(String thingDeviceType, String ftaIdentifier, String userIdentifier) {
+    public static String generateThingIdentifier(String thingDeviceType, String ftaIdentifier, String ftpIdentifier) {
         return CryptoConstants.IDENTITY_ROOT_PART + CryptoConstants.IDENTITY_SEPARATOR + EntityType.THING.getCertName()
                 + CryptoConstants.IDENTITY_SEPARATOR + thingDeviceType + CryptoConstants.IDENTITY_SEPARATOR
-                + ftaIdentifier + CryptoConstants.IDENTITY_SEPARATOR + userIdentifier
+                + ftaIdentifier + CryptoConstants.IDENTITY_SEPARATOR + ftpIdentifier
                 + CryptoConstants.IDENTITY_SEPARATOR + CryptoUtilFunctions.generateUUID();
+    }
+
+    public static String getEntityTypeFromIdentifier(String identifier) {
+        String[] parts = identifier.split("\\" + CryptoConstants.IDENTITY_SEPARATOR);
+        return parts[2];
     }
 
 }
