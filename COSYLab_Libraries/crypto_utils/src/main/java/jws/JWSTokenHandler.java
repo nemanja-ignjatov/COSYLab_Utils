@@ -18,6 +18,10 @@ public class JWSTokenHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(JWSTokenHandler.class);
     private static final String ATTRIBUTES_CLAIM_NAME = "meta_info";
+    // Negative offset for starting tokens validity, to avoid errors due to clocks synhronization between devices
+    private static final long TOKEN_VALIDITY_START_OFFSET_MILLIS = 60000L;
+    // 2 hours
+    private static final long TOKEN_VALIDITY_DURATION = 2 * 3600000;
 
     private PublicKey publicKey;
     private PrivateKey privateKey;
@@ -46,8 +50,8 @@ public class JWSTokenHandler {
         String jws = Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(this.issuerId)
-                .setExpiration(new Date(System.currentTimeMillis()+2*3600000))
-                .setNotBefore(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY_DURATION))
+                .setNotBefore(new Date(System.currentTimeMillis() - TOKEN_VALIDITY_START_OFFSET_MILLIS))
                 .setIssuedAt(new Date())
                 .setId(UUID.randomUUID().toString())
                 .setSubject(this.subjectId)
@@ -60,8 +64,8 @@ public class JWSTokenHandler {
         String jws = Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(this.issuerId)
-                .setExpiration(new Date(System.currentTimeMillis()+2*3600000))
-                .setNotBefore(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY_DURATION))
+                .setNotBefore(new Date(System.currentTimeMillis() - TOKEN_VALIDITY_START_OFFSET_MILLIS))
                 .setIssuedAt(new Date())
                 .setId(UUID.randomUUID().toString())
                 .setSubject(subjectId)
@@ -73,8 +77,8 @@ public class JWSTokenHandler {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(this.issuerId)
-                .setExpiration(new Date(System.currentTimeMillis()+2*3600000))
-                .setNotBefore(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY_DURATION))
+                .setNotBefore(new Date(System.currentTimeMillis() - TOKEN_VALIDITY_START_OFFSET_MILLIS))
                 .setIssuedAt(new Date())
                 .setId(UUID.randomUUID().toString())
                 .setSubject(this.subjectId)
@@ -85,8 +89,8 @@ public class JWSTokenHandler {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuer(this.issuerId)
-                .setExpiration(new Date(System.currentTimeMillis()+2*3600000))
-                .setNotBefore(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + TOKEN_VALIDITY_DURATION))
+                .setNotBefore(new Date(System.currentTimeMillis() - TOKEN_VALIDITY_START_OFFSET_MILLIS))
                 .setIssuedAt(new Date())
                 .setId(UUID.randomUUID().toString())
                 .setSubject(subjectId)
@@ -99,6 +103,6 @@ public class JWSTokenHandler {
 
     public String getClaimFromJWS(String jws, String claimKey) {
         Claims claims = Jwts.parserBuilder().setSigningKey(publicKey).build().parseClaimsJws(jws).getBody();
-        return (String)claims.get(claimKey);
+        return (String) claims.get(claimKey);
     }
 }
