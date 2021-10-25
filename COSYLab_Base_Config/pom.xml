@@ -20,6 +20,7 @@
 	<cosylab.libraries.version>1.2</cosylab.libraries.version>
     <cosylab.crypto.version>1.2</cosylab.crypto.version>
     <cosylab.cloud.utils.version>1.2</cosylab.cloud.utils.version>
+    <cosylab.fog.utils.version>1.2</cosylab.fog.utils.version>
   </properties>
 
   <build>

@@ -1,0 +1,13 @@
+package fog.payloads.fta;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class GetCertificateRequest {
+
+    private String entityId;
+}
