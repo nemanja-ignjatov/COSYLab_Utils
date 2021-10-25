@@ -6,7 +6,7 @@
 
   <groupId>at.cosylab.utils</groupId>
   <artifactId>base_config</artifactId>
-  <version>1.1</version>
+  <version>1.2</version>
   <packaging>pom</packaging>
   
   <name>base_config</name>
@@ -14,12 +14,12 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
-	
-	<cosylab.libraries.version>1.1</cosylab.libraries.version>
-    <cosylab.crypto.version>1.1</cosylab.crypto.version>
-    <cosylab.cloud.utils.version>1.1</cosylab.cloud.utils.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+
+	<cosylab.libraries.version>1.2</cosylab.libraries.version>
+    <cosylab.crypto.version>1.2</cosylab.crypto.version>
+    <cosylab.cloud.utils.version>1.2</cosylab.cloud.utils.version>
   </properties>
 
   <build>
