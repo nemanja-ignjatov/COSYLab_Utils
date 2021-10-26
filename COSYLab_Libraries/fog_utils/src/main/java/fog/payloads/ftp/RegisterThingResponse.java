@@ -12,5 +12,5 @@ import java.io.Serializable;
 public class RegisterThingResponse implements Serializable {
 
     private String certificate;
-    
+    private String privKey;
 }
