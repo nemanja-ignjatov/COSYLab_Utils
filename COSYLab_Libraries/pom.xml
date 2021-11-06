@@ -16,6 +16,7 @@
         <module>crypto_utils</module>
         <module>cloud_utils</module>
         <module>fog_utils</module>
+        <module>context_utils</module>
     </modules>
     <packaging>pom</packaging>
 </project>
