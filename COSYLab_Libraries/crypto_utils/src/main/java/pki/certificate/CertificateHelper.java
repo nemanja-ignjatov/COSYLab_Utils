@@ -52,7 +52,6 @@ public class CertificateHelper {
         Date endDate = calendar.getTime();
 
         // Certificate serial number
-        // TODO revisit this
         BigInteger certSerialNumber = new BigInteger(Long.toString(now));
 
         // Signature algorithm

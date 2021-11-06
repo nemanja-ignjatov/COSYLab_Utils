@@ -14,4 +14,8 @@ public final class RegisterCAAttributesRequest implements Serializable {
 
     private List<ContextAttributeConfiguration> attributes;
 
+    public RegisterCAAttributesRequest(ContextAttributeConfiguration attribute) {
+        this.attributes = List.of(attribute);
+    }
+
 }

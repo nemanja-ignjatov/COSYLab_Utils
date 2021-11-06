@@ -6,7 +6,7 @@ public class ErrorHTTPResponse {
     private int errorCode;
 
     public ErrorHTTPResponse() {
-        // TODO Auto-generated constructor stub
+
     }
 
     public ErrorHTTPResponse(String errorMessage, int errorCode) {

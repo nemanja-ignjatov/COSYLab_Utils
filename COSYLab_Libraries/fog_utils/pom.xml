@@ -60,6 +60,12 @@
             <version>5.2.9.RELEASE</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>at.cosylab.utils</groupId>
+            <artifactId>cloud_utils</artifactId>
+            <version>${cosylab.cloud.utils.version}</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>
